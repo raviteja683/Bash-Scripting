@@ -1,4 +1,4 @@
 #!/bin/bash
 #take input from user
-read -p "The name of user is :" USER
+read -p "enter user name :" USER
 echo "The name of user is : $USER"
