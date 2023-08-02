@@ -4,5 +4,5 @@
 # it should be in 1st line
 
 echo 'welcome to bash scripting'
-echo 'Hello Ravi'
+echo 'Hello Ravi...'
 echo 'How are you doing today!'
