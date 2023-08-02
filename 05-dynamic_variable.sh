@@ -2,4 +2,4 @@
 #print current date
 #DATE=$(date +%F)
 DATE=$(date)
-echo "today's date is $DATE"
+echo -e "today's date is /e[33m $DATE /e[0m"
