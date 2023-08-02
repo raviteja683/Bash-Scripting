@@ -14,3 +14,8 @@ In this repo, I'm about learn the bash scipting and major goal is automate the e
     $git clone url
 ```
 
+## install the git in VM
+```
+    $sudo yum install git -y
+```
+
