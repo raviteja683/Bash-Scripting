@@ -33,7 +33,7 @@ This is a repository created to publish all the Bash Bascis and project automati
     $alias                                  // to see the all alias names in linux
     $vim ~/.bash_profile                    // update the alias name permenantely by adding the text
 ```
-### Following are the shell scripting topics which we discuss as a part of our project
+### Basic concepts of Shell-Scripting
 
 ```
 1. SheBang Notation and Comments
