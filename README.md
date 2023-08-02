@@ -9,4 +9,8 @@ In this repo, I'm about learn the bash scipting and major goal is automate the e
     $git commit -m 'message' # commit the code -m means message
     $git push #to push the code
 ``````
+## how to clone the code
+```
+    $git clone url
+```
 
