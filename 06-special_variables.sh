@@ -12,4 +12,6 @@ echo First alphabet is : $6
 echo First alphabet is : $7
 echo First alphabet is : $8
 echo First alphabet is : $9
+echo First alphabet is : $10
+echo First alphabet is : $11
 
