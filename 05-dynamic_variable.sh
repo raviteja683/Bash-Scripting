@@ -1,4 +1,5 @@
 #!/bin/bash
 #print current date
-D = $(date + %F)
-echo -e "today's date is $D"
+#DATE=$(date +%F)
+DATE= $(date + %F)
+echo "today's date is $DATE"
