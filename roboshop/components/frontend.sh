@@ -13,11 +13,15 @@ status() {
         exit 2
     fi
 }
-
-echo -n "Installing Nginx :"
 yum install nginxdffgfkgjfd -y  &>> /tmp/frontend.log
 echo -n "Frontend (nginx) installation : "
-status $?
+#status $?
+if [ $1 -eq 0 ]; then 
+        echo -e "\e[32m success \e[0m"
+    else 
+        echo -e "\e[31m failure \e[0m"
+        exit 2
+    fi
 systemctl enable nginx
 systemctl start nginx &>> /tmp/frontend.log
 echo -n "nginx start : "
