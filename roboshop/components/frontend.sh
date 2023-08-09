@@ -14,7 +14,11 @@ status(){
 }
 yum install nginxdffgfkgjfd -y  &>> /tmp/frontend.log
 echo -n "Frontend (nginx) installation : "
-status $?
+if [ $1 -eq 0 ]; then
+    echo -e "\e[32m SUCCESS!! \e[0m"
+    else
+        echo -e "\e[31m FAILED \e[0m"
+    fi
 systemctl enable nginx
 systemctl start nginx &>> /tmp/frontend.log
 echo -n "nginx start : "
