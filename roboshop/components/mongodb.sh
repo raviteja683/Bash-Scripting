@@ -31,10 +31,10 @@ echo -n "Downloading the ${COMPONENT} schema: "
 curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" 
 stat $? 
 
-# echo -n "Extracing the ${COMPONENT} Schema:"
-# cd /tmp 
-# unzip -o ${COMPONENT}.zip &>> ${LOGFILE}  #-o overwrite the existing file [y]es, [n]o, [A]ll, [N]one, [r]ename: n
-# stat $? 
+echo -n "Extracing the ${COMPONENT} Schema:"
+cd /tmp 
+unzip -o ${COMPONENT}.zip &>> ${LOGFILE}  #-o overwrite the existing file [y]es, [n]o, [A]ll, [N]one, [r]ename: n
+stat $? 
 
 # echo -n "Injecting ${COMPONENT} Schema:"
 # cd ${COMPONENT}-main
