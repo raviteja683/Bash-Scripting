@@ -2,9 +2,12 @@
 ACTION=$1
 case $ACTION in 
     start)
-        echo "Payment start"
+        echo "Payment start service"
     ;;
     stop)
-        echo "Payment stop"
+        echo "Payment stop service"
+    ;;
+    *)
+        echo "You should provide stop / start as a agurment /n ex: bash scriptname.sh start"
     ;;
 esac
