@@ -8,9 +8,14 @@ if [ $USER_ID -ne 0 ] ; then
 fi
 echo -e "\e[32m installing nginx.....please wait \e[0m"
 yum install nginx -y &>> /tmp/frontend.log
-if [$? -eq 0]; then
+# if [ $1 -eq 0 ]; then 
+#         echo -e "\e[32m success \e[0m"
+#     else 
+#         echo -e "\e[31m failure \e[0m"
+#         exit 2
+#     fi
+if [ $? -eq 0 ]; then
     echo -e "\e[32m ngnix installed successfully!! \e[0m"
-
 else
     echo -e "\e[31m ngnix installation failed \e[0m"
 fi
