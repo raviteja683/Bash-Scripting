@@ -5,14 +5,23 @@ if [ $USER_ID -ne 0 ] ; then
     echo -e "\e[33m You need install frontend as root user!!\e[0m "
     exit 1
 fi
+stat() {
+    if [ $1 -eq 0 ]; then 
+        echo -e "\e[32m success \e[0m"
+    else 
+        echo -e "\e[31m failure \e[0m"
+        exit 2
+    fi
+}
 echo -n "Frontend (nginx) installation: "
 yum install nginx80 -y  &>> /tmp/frontend.log
-if [ $? -eq 0 ]; then
-    echo -e "\e[32m SUCCESS!! \e[0m"
-else
-    echo -e "\e[31m FAILED \e[0m"
-    exit 2
-fi
+# if [ $? -eq 0 ]; then
+#     echo -e "\e[32m SUCCESS!! \e[0m"
+# else
+#     echo -e "\e[31m FAILED \e[0m"
+#     exit 2
+# fi
+stat $?
 # systemctl enable nginx
 # systemctl start nginx &>> /tmp/frontend.log
 # echo -n "nginx start : "
