@@ -8,6 +8,6 @@ case $ACTION in
         echo "Payment stop service"
     ;;
     *)
-        echo "You should provide stop / start as a agurment /n ex: bash scriptname.sh start"
+        echo -e "You should provide stop / start as a agurment /n ex: bash scriptname.sh start"
     ;;
 esac
