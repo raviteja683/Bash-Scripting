@@ -33,7 +33,7 @@ stat $?
 
 echo -n "Extracing the ${COMPONENT} Schema:"
 cd /tmp 
-unzip ${COMPONENT}.zip &>> ${LOGFILE} 
+unzip -o ${COMPONENT}.zip &>> ${LOGFILE}  #-o overwrite the existing file [y]es, [n]o, [A]ll, [N]one, [r]ename: n
 stat $? 
 
 
