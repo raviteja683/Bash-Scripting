@@ -6,7 +6,7 @@ if [ $USER_ID -ne 0 ] ; then
     exit 1
 fi
 status(){
-    if [ $? -eq 0 ]; then
+    if [ $1 -eq 0 ]; then
     echo -e "\e[32m SUCCESS!! \e[0m"
     else
         echo -e "\e[31m FAILED \e[0m"
@@ -14,22 +14,14 @@ status(){
 }
 yum install nginx -y  &>> /tmp/frontend.log
 echo -n "Frontend (nginx) installation : "
-status
+status $?
 systemctl enable nginx
 systemctl start nginx &>> /tmp/frontend.log
 echo -n "nginx start : "
-if [ $? -eq 0 ]; then
-    echo -e "\e[32m SUCCESS!! \e[0m"
-else
-    echo -e "\e[31m FAILED!! \e[0m"
-fi
+status $?
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip" &>> /tmp/frontend.log
 echo -n "frontend components downloaded : "
-if [ $? -eq 0 ]; then
-    echo -e "\e[32m SUCCESS!! \e[0m"
-else
-    echo -e "\e[31m FAILED!! \e[0m"
-fi
+status $?
 cd /usr/share/nginx/html
 rm -rf * &>> /tmp/frontend.log
 unzip /tmp/frontend.zip &>> /tmp/frontend.log
