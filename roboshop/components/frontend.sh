@@ -5,7 +5,7 @@ if [ $USER_ID -ne 0 ] ; then
     echo -e "\e[33m You need install frontend as root user!!\e[0m "
     exit 1
 fi
-stat() {
+status() {
     if [ $1 -eq 0 ]; then 
         echo -e "\e[32m success \e[0m"
     else 
