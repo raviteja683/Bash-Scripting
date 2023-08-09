@@ -36,7 +36,6 @@ cd /tmp
 unzip -o ${COMPONENT}.zip &>> ${LOGFILE}  #-o overwrite the existing file [y]es, [n]o, [A]ll, [N]one, [r]ename: n
 stat $? 
 
-
 echo -n "Injecting ${COMPONENT} Schema:"
 cd ${COMPONENT}-main
 mongo < catalogue.js    &>>  ${LOGFILE}
