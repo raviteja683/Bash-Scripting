@@ -5,7 +5,8 @@ if [ $ACTION == "start" ];
 then
     echo -e "\e[33m Payment start is ready\e[0m"
     exit 0
-elif  
+elif [$ACTION == "restart" ];
+then
     echo -e "\e[34m Payment restart is ready\e[0m"
     exit 1
 else
