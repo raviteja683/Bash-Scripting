@@ -31,7 +31,7 @@ cd /usr/share/nginx/html
 rm -rf * &>> /tmp/frontend.log
 unzip /tmp/frontend.zip &>> /tmp/frontend.log
 mv frontend-main/* . &>> /tmp/frontend.log
-# mv static/* .
-# rm -rf frontend-main README.md
-# mv localhost.conf /etc/nginx/default.d/roboshop.conf
+mv static/* . &>> /tmp/frontend.log
+rm -rf frontend-main README.md &>> /tmp/frontend.log
+mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/frontend.log
 
