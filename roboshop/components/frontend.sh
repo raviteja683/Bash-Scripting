@@ -13,13 +13,18 @@ else
     echo -e "\e[31m FAILED \e[0m"
 fi
 systemctl enable nginx
-systemctl start nginx
+systemctl start nginx &>> /tmp/frontend.log
 if [ $? -eq 0 ]; then
     echo -e "\e[32m SUCCESS!! \e[0m"
 else
     echo -e "\e[31m FAILED!! \e[0m"
 fi
-# curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
+curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
+if [ $? -eq 0 ]; then
+    echo -e "\e[32m SUCCESS!! \e[0m"
+else
+    echo -e "\e[31m FAILED!! \e[0m"
+fi
 # cd /usr/share/nginx/html
 # rm -rf *
 # unzip /tmp/frontend.zip
