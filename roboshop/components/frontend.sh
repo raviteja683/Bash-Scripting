@@ -16,8 +16,6 @@ stat() {
 echo -n "Frontend (nginx) installation: "
 yum install nginx80 -y  &>> /tmp/frontend.log
 stat $?
-
-
 systemctl enable nginx
 echo -n "nginx start : "
 systemctl start nginx &>> /tmp/frontend.log
