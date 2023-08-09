@@ -1,7 +1,7 @@
 #!/bin/bash
 ACTION=$1
 echo "if else demo"
-if [ $ACTION == "start" ];
+if [ $ACTION == "start"];
 then
     echo Payment start is ready
     exit 0
