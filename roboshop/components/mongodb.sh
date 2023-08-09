@@ -24,7 +24,7 @@ stat $?
 systemctl enable mongod &>> ${LOG_FILE}
 systemctl start mongod &>> ${LOG_FILE}
 echo -n "Enabling the visibility ${COMPONENT}, so other server can access it (sudo netplan -tulpn) "
-sed -ie 's/127.0.0.1/0.0.0.0/g' testing.conf
+sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
 stat $?
 
 
