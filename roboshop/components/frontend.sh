@@ -1,6 +1,7 @@
 #/bin/bash
 echo "configuring frontend:"
 USER_ID= $(id -u)
+echo "user id is : $USER_ID"
 if [ $USER_ID -ne 0 ] ; then
     echo "You need install frontend as root user!! "
     exit 1
