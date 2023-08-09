@@ -1,5 +1,6 @@
 #/bin/bash
 COMPONENT=frontend
+LOG_FILE="/tmp/${COMPONENT}.log"
 echo "configuring ${COMPONENT}:"
 USER_ID=$(id -u)
 if [ $USER_ID -ne 0 ] ; then
@@ -15,25 +16,25 @@ stat() {
     fi
 }
 echo -n "${COMPONENT} (nginx) installation: "
-yum install nginx -y  &>> /tmp/${COMPONENT}.log
+yum install nginx -y  &>> ${LOG_FILE}
 stat $?
 systemctl enable nginx
 echo -n "nginx start : "
-systemctl start nginx &>> /tmp/${COMPONENT}.log
+systemctl start nginx &>> ${LOG_FILE}
 stat $?
 echo -n "${COMPONENT} components downloaded : "
-curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" &>> /tmp/${COMPONENT}.log
+curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" &>> ${LOG_FILE}
 stat $?
 cd /usr/share/nginx/html
-rm -rf * &>> /tmp/${COMPONENT}.log
+rm -rf * &>> ${LOG_FILE}
 echo -n "Extracting ${COMPONENT}: "
-unzip /tmp/${COMPONENT}.zip &>> /tmp/${COMPONENT}.log
+unzip /tmp/${COMPONENT}.zip &>> ${LOG_FILE}
 stat $?
 mv ${COMPONENT}-main/* . 
 mv static/* . 
-rm -rf ${COMPONENT}-main README.md &>> /tmp/${COMPONENT}.log
-mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/${COMPONENT}.log
+rm -rf ${COMPONENT}-main README.md &>> ${LOG_FILE}
+mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> ${LOG_FILE}
 echo -n "Restarting ${COMPONENT}:"
-systemctl daemon-reload     &>>  /tmp/${COMPONENT}.log
-systemctl restart nginx     &>>  /tmp/${COMPONENT}.log
+systemctl daemon-reload     &>>  ${LOG_FILE}
+systemctl restart nginx     &>>  ${LOG_FILE}
 stat $?
