@@ -12,7 +12,7 @@ status(){
         echo -e "\e[31m FAILED \e[0m"
     fi
 }
-yum install nginxdfd -y  &>> /tmp/frontend.log
+yum install nginxdffgfkgjfd -y  &>> /tmp/frontend.log
 echo -n "Frontend (nginx) installation : "
 status $?
 systemctl enable nginx
