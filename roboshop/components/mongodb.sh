@@ -19,10 +19,13 @@ echo -n "Configuring ${COMPONENT} repo: "
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
 stat $?
 echo -n "installing ${COMPONENT} : "
-yum install -y mongodb-org &>> $LOG_FILE
+yum install -y mongodb-org &>> ${LOG_FILE}
 stat $?
 systemctl enable mongod &>> ${LOG_FILE}
 systemctl start mongod &>> ${LOG_FILE}
+echo -n "Enabling the visibility ${COMPONENT}, so other server can access it (sudo netplan -tulpn) "
+sed -ie 's/127.0.0.1/0.0.0.0/g' testing.conf
+stat $?
 
 
 
