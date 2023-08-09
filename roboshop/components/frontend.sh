@@ -1,5 +1,10 @@
 #/bin/bash
-echo "configuring frontend"
+echo "configuring frontend:"
+USER= ${id -u}
+if [$USER -ne 0];then
+    echo "You need install frontend as root user!! "
+    exit 1
+fi
 echo "installing nginx.....please wait"
 yum install nginx -y
 # systemctl enable nginx
