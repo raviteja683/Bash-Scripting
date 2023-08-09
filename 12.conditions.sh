@@ -2,7 +2,7 @@
 ACTION=$1
 case $ACTION in 
     start)
-        echo "Payment \e[32m start \e[0m service"
+        echo -e "Payment \e[32m start \e[0m service"
     ;;
     stop)
         echo "Payment stop service"
