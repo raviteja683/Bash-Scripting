@@ -25,9 +25,11 @@ curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend
 stat $?
 cd /usr/share/nginx/html
 rm -rf * &>> /tmp/frontend.log
+echo -n "Extracting Frontend:"
 unzip /tmp/frontend.zip &>> /tmp/frontend.log
-mv frontend-main/* . &>> /tmp/frontend.log
-mv static/* . &>> /tmp/frontend.log
+stat $?
+mv frontend-main/* . 
+mv static/* . 
 rm -rf frontend-main README.md &>> /tmp/frontend.log
 mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/frontend.log
 echo -n "Restarting Frontend:"
