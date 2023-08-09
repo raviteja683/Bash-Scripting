@@ -10,6 +10,6 @@ elif
     exit 1
 else
     echo  -e "\e[31m Payment argument is different \e[0m"
-    exit 1
+    exit 2
 fi
 
