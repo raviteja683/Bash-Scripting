@@ -1,5 +1,5 @@
 #!bin/bash
-ACTION=start
+ACTION=$1
 case $ACTION in 
     start)
         echo "Payment start"
