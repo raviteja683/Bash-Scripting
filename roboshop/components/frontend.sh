@@ -6,7 +6,7 @@ if [ $USER_ID -ne 0 ] ; then
     exit 1
 fi
 echo -n "Frontend (nginx) installation: "
-yum install nginx80 -y  
+yum install nginx80 -y  &>> /tmp/frontend.log
 if [ $? -eq 0 ]; then
     echo -e "\e[32m SUCCESS!! \e[0m"
 else
