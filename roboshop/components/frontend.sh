@@ -14,18 +14,7 @@ status() {
     fi
 }
 
-echo -e "\e[35m Configuring ${COMPONENT} ......! \e[0m \n"
-
 echo -n "Installing Nginx :"
-#yum install nginx -y     &>>  ${LOGFILE}
-# stat $?
-# status() {
-#     if [ $1 -eq 0 ]; then
-#     echo -e "\e[32m SUCCESS!! \e[0m"
-#     else
-#         echo -e "\e[31m FAILED \e[0m"
-#     fi
-# }
 yum install nginxdffgfkgjfd -y  &>> /tmp/frontend.log
 echo -n "Frontend (nginx) installation : "
 status $?
