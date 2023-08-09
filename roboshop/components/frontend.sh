@@ -38,3 +38,4 @@ echo -n "Restarting ${COMPONENT}:"
 systemctl daemon-reload     &>>  ${LOG_FILE}
 systemctl restart nginx     &>>  ${LOG_FILE}
 stat $?
+echo -e "\e[35m ${COMPONENT} Installation Is Completed \e[0m \n"
