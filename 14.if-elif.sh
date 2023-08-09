@@ -7,7 +7,7 @@ then
     exit 0
 elif [ $ACTION == "restart" ];
 then
-    echo -e "\e[34m Payment restart is ready\e[0m
+    echo -e "\e[34m Payment restart is ready\e[0m"
     exit 1
 else
     echo  -e "\e[31m Payment argument is different \e[0m"
