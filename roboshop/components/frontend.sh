@@ -27,10 +27,10 @@ if [ $? -eq 0 ]; then
 else
     echo -e "\e[31m FAILED!! \e[0m"
 fi
-# cd /usr/share/nginx/html
-# rm -rf *
-# unzip /tmp/frontend.zip
-# mv frontend-main/* .
+cd /usr/share/nginx/html
+rm -rf * &>> /tmp/frontend.log
+unzip /tmp/frontend.zip &>> /tmp/frontend.log
+mv frontend-main/* . &>> /tmp/frontend.log
 # mv static/* .
 # rm -rf frontend-main README.md
 # mv localhost.conf /etc/nginx/default.d/roboshop.conf
