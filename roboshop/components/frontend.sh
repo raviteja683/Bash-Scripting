@@ -24,18 +24,18 @@ stat() {
 yum install nginxdffgfkgjfd -y  &>> /tmp/frontend.log
 echo -n "Frontend (nginx) installation : "
 stat $?
-systemctl enable nginx
-systemctl start nginx &>> /tmp/frontend.log
-echo -n "nginx start : "
-stat $?
-curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip" &>> /tmp/frontend.log
-echo -n "frontend components downloaded : "
-stat $?
-cd /usr/share/nginx/html
-rm -rf * &>> /tmp/frontend.log
-unzip /tmp/frontend.zip &>> /tmp/frontend.log
-mv frontend-main/* . &>> /tmp/frontend.log
-mv static/* . &>> /tmp/frontend.log
-rm -rf frontend-main README.md &>> /tmp/frontend.log
-mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/frontend.log
+# systemctl enable nginx
+# systemctl start nginx &>> /tmp/frontend.log
+# echo -n "nginx start : "
+# stat $?
+# curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip" &>> /tmp/frontend.log
+# echo -n "frontend components downloaded : "
+# stat $?
+# cd /usr/share/nginx/html
+# rm -rf * &>> /tmp/frontend.log
+# unzip /tmp/frontend.zip &>> /tmp/frontend.log
+# mv frontend-main/* . &>> /tmp/frontend.log
+# mv static/* . &>> /tmp/frontend.log
+# rm -rf frontend-main README.md &>> /tmp/frontend.log
+# mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> /tmp/frontend.log
 
