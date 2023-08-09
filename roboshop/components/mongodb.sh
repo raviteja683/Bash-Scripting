@@ -19,7 +19,7 @@ echo -n "Configuring ${COMPONENT} repo: "
 curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/stans-robot-project/mongodb/main/mongo.repo
 stat $?
 echo -n "installing ${COMPONENT} : "
-yum install -y mongodb-org 
+yum install -y mongodb-org
 stat $?
 systemctl enable mongod &>> ${LOG_FILE}
 systemctl start mongod &>> ${LOG_FILE}
