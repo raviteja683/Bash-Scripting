@@ -5,7 +5,7 @@ if [ $USER_ID -ne 0 ] ; then
     echo -e "\e[33m You need install frontend as root user!!\e[0m "
     exit 1
 fi
-yum install nginx80 -y  &>> /tmp/frontend.log
+yum install nginx80 -y  
 echo -n "Frontend (nginx) installation : "
 if [ $? -eq 0 ]; then
     echo -e "\e[32m SUCCESS!! \e[0m"
