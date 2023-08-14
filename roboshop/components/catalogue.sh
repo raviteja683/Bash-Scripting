@@ -28,7 +28,7 @@ stat $?
 id ${APPUSER} &>>${LOGFILE}
 if [ $? -ne 0 ]; then
      echo -n "create a new user account:"
-     useradd roboshop
+     useradd roboshop   &>> ${LOGFILE}
      stat $?
  
 fi
