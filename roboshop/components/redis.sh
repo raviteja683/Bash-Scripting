@@ -23,8 +23,8 @@ yum install redis-6.2.12 -y &>> ${LOGFILE}
 stat $?
 
 echo -n "Enabling the visibility ${COMPONENT}, so other server can access it (sudo netstat -tulpn): "
-sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf
-sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
+sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/${COMPONENT}.conf
+sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/${COMPONENT}/${COMPONENT}.conf
 stat $?
 
 systemctl daemon-reload ${COMPONENT} &>> ${LOGFILE}
