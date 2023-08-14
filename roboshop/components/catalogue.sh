@@ -29,9 +29,15 @@ id ${APPUSER} &>>${LOGFILE}
 if [ $? -ne 0 ]; then
      echo -n "create a new user account:"
      useradd roboshop   &>> ${LOGFILE}
-     stat $?
- 
+     stat $? 
 fi
+
+# Switching to User account  sudo su - roboshop
+echo -n "Downloading the ${COMPONENT} : "
+curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" 
+stat $? 
+
+
 
 # $ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
 # $ cd /home/roboshop
