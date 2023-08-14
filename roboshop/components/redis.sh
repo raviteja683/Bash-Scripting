@@ -27,25 +27,11 @@ sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf
 sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
 stat $?
 
-# systemctl enable mongod &>> ${LOGFILE}
-# systemctl start mongod &>> ${LOGFILE}
-# echo -n "Downloading the ${COMPONENT} schema: "
-# curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" 
-# stat $? 
+systemctl daemon-reload ${COMPONENT} &>> ${LOGFILE}
+systemctl enable ${COMPONENT} &>> ${LOGFILE}
+systemctl start ${COMPONENT} &>> ${LOGFILE}
 
-# echo -n "Extracting the ${COMPONENT} Schema:"
-# cd /tmp 
-# unzip -o ${COMPONENT}.zip &>> ${LOGFILE} 
-#  #-o overwrite the existing file [y]es, [n]o, [A]ll, [N]one, [r]ename: n
-# stat $? 
-
-# echo -n "Injecting ${COMPONENT} Schema:"
-# cd ${COMPONENT}-main
-# mongo < catalogue.js    &>>  ${LOGFILE}
-# mongo < users.js        &>>  ${LOGFILE}
-# stat $? 
-
-# echo -e "\e[35m ${COMPONENT} Installation Is Completed \e[0m \n"
+echo -e "\e[35m ${COMPONENT} Installation Is Completed \e[0m \n"
 
 
 
