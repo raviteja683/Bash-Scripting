@@ -20,9 +20,10 @@ echo -e "\e[35m Congiguring the repo \e[0m...."
 curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash - &>>LOGFILE
 stat $?
 
+echo -n "Node Js installation: "
+yum install nodejs -y  &>> ${LOGFILE}
+stat $?
 
-# curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
-# yum install nodejs -y
 # useradd roboshop
 # $ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
 # $ cd /home/roboshop
