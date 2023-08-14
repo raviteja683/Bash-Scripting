@@ -28,10 +28,11 @@ stat $?
 id ${APPUSER} &>>${LOGFILE}
 if [ $? -ne 0 ]; then
      echo -n "create a new user account:"
-     useradd ${APPUSER}
+     useradd roboshop
      stat $?
  
 fi
+
 # $ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
 # $ cd /home/roboshop
 # $ unzip /tmp/catalogue.zip
