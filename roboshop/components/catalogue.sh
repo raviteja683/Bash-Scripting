@@ -3,6 +3,7 @@ COMPONENT=catalogue
 LOGFILE="/tmp/${COMPONENT}.log"
 echo "configuring ${COMPONENT}:"
 USER_ID=$(id -u)
+APPUSER="roboshop"
 if [ $USER_ID -ne 0 ] ; then
     echo -e "\e[33m You need install ${COMPONENT} as root user!!\e[0m "
     exit 1
@@ -25,6 +26,11 @@ yum install nodejs -y  &>> ${LOGFILE}
 stat $?
 
 useradd roboshop
+# id ${APPUSER}
+# if [$? -ne 0]; then
+#     echo -n "create a new user name is ${APPUSER}:"
+
+# fi
 # $ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
 # $ cd /home/roboshop
 # $ unzip /tmp/catalogue.zip
