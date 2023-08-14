@@ -29,7 +29,7 @@ id ${APPUSER} &>>${LOGFILE}
 if [ $? -ne 0 ]; then
      echo -n "create a new user account name is ${APPUSER}:"
      useradd ${APPUSER}
-     $?
+     #$?
  
 fi
 # $ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
