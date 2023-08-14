@@ -39,9 +39,18 @@ stat $?
 
 cd /home/${APPUSER}
 rm -rf ${COMPONENT} >> ${LOGFILE}
-unzip -o /tmp/catalogue.zip >> ${LOGFILE}
-mv catalogue-main catalogue
-cd /home/roboshop/catalogue
+unzip -o /tmp/${COMPONENT}.zip >> ${LOGFILE}
+# [ roboshop@catalogue ~ ]$ ls -ltr
+# total 0
+# drwxr-xr-x 2 root root 83 Jun 22  2022 catalogue-main to roboshop account
+# Need to update the ownership of the file
+echo -n "Changing Ownership to user account: ..."
+echo -n "Changing the ownership :"
+mv  ${COMPONENT}-main ${COMPONENT} 
+chown -R ${APPUSER}:${APPUSER} /home/${APPUSER}/${COMPONENT}/
+stat $?
+
+#cd /home/${APPUSER}/${COMPONENT}
 # $ npm install
 #$ vim systemd.servce
 # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
