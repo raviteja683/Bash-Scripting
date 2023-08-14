@@ -50,8 +50,10 @@ mv  ${COMPONENT}-main ${COMPONENT}
 chown -R ${APPUSER}:${APPUSER} /home/${APPUSER}/${COMPONENT}/
 stat $?
 
-#cd /home/${APPUSER}/${COMPONENT}
-# $ npm install
+echo -n "Generating the ${COMPONENT} artifacts :"
+cd /home/${APPUSER}/${COMPONENT}/
+npm install     &>> ${LOGFILE}
+stat $? 
 #$ vim systemd.servce
 # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
 # systemctl daemon-reload
