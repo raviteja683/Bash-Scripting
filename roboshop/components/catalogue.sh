@@ -18,19 +18,20 @@ stat() {
 }
 
 echo -e "\e[35m Congiguring the repo \e[0m...."
-curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash - &>>LOGFILE
+curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash - &>> ${LOGFILE}
 stat $?
 
 echo -n "Node Js installation: "
 yum install nodejs -y  &>> ${LOGFILE}
 stat $?
 
-useradd roboshop
-# id ${APPUSER}
-# if [$? -ne 0]; then
-#     echo -n "create a new user name is ${APPUSER}:"
-
-# fi
+id ${APPUSER} &>>${LOGFILE}
+if [$? -ne 0]; then
+     echo -n "create a new user account name is ${APPUSER}:"
+     useradd ${APPUSER}
+     $?
+ 
+fi
 # $ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
 # $ cd /home/roboshop
 # $ unzip /tmp/catalogue.zip
