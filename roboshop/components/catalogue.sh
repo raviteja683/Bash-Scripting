@@ -1,13 +1,17 @@
-#/bin/bash
+#!/bin/bash 
+
+# Validate the user who is running the script is a root user or not.
+
+USER_ID=$(id -u)
 COMPONENT=catalogue
 LOGFILE="/tmp/${COMPONENT}.log"
-echo "configuring ${COMPONENT}:"
-USER_ID=$(id -u)
 APPUSER="roboshop"
-if [ $USER_ID -ne 0 ] ; then
-    echo -e "\e[33m You need install ${COMPONENT} as root user!!\e[0m "
+
+if [ $USER_ID -ne 0 ] ; then    
+    echo -e "\e[31m Script is expected to executed by the root user or with a sudo privilege \e[0m \n \t Example: \n\t\t sudo bash wrapper.sh frontend"
     exit 1
-fi
+fi 
+
 stat() {
     if [ $1 -eq 0 ]; then 
         echo -e "\e[32m success \e[0m"
@@ -17,33 +21,33 @@ stat() {
     fi
 }
 
-echo -e "\e[35m Congiguring the repo \e[0m...."
-curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash - &>> ${LOGFILE}
+echo -e "\e[35m Configuring ${COMPONENT} ......! \e[0m \n"
+
+echo -n "Configuring ${COMPONENT} repo :"
+curl --silent --location https://rpm.nodesource.com/setup_16.x | bash - &>> ${LOGFILE} 
+stat $? 
+
+echo -n "Installing NodeJS :"
+yum install nodejs -y   &>> ${LOGFILE} 
 stat $?
 
-echo -n "Node Js installation: "
-yum install nodejs -y  &>> ${LOGFILE}
-stat $?
+id ${APPUSER}  &>> ${LOGFILE} 
+if [ $? -ne 0 ] ; then 
+    echo -n "Creating Application User Account :"
+    useradd roboshop 
+    stat $? 
+fi 
 
-id ${APPUSER} &>>${LOGFILE}
-if [ $? -ne 0 ]; then
-     echo -n "create a new user account:"
-     useradd roboshop   &>> ${LOGFILE}
-     stat $? 
-fi
-
-# Switching to User account  sudo su - roboshop
 echo -n "Downloading the ${COMPONENT} : "
 curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" 
 stat $? 
 
-cd /home/${APPUSER}
-rm -rf ${COMPONENT} >> ${LOGFILE}
-unzip -o /tmp/${COMPONENT}.zip >> ${LOGFILE}
-# [ roboshop@catalogue ~ ]$ ls -ltr
-# total 0
-# drwxr-xr-x 2 root root 83 Jun 22  2022 catalogue-main to roboshop account
-# Need to update the ownership of the file
+echo -n "Copying the ${COMPONENT} to ${APPUSER} home directory :"
+cd /home/${APPUSER}/
+rm -rf ${COMPONENT}     &>> ${LOGFILE}
+unzip -o /tmp/${COMPONENT}.zip  &>> ${LOGFILE}
+stat $?
+
 echo -n "Changing the ownership :"
 mv  ${COMPONENT}-main ${COMPONENT} 
 chown -R ${APPUSER}:${APPUSER} /home/${APPUSER}/${COMPONENT}/
@@ -57,7 +61,7 @@ stat $?
 echo -n "Configuring the ${COMPONENT} system file :"
 sed -ie 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/${APPUSER}/${COMPONENT}/systemd.service
 mv /home/${APPUSER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
-stat $?
+stat $? 
 
 echo -n "Starting the ${COMPONENT} service :"
 systemctl daemon-reaload &>> ${LOGFILE}
