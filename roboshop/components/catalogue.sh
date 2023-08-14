@@ -44,7 +44,6 @@ unzip -o /tmp/${COMPONENT}.zip >> ${LOGFILE}
 # total 0
 # drwxr-xr-x 2 root root 83 Jun 22  2022 catalogue-main to roboshop account
 # Need to update the ownership of the file
-echo -n "Changing Ownership to user account: ..."
 echo -n "Changing the ownership :"
 mv  ${COMPONENT}-main ${COMPONENT} 
 chown -R ${APPUSER}:${APPUSER} /home/${APPUSER}/${COMPONENT}/
@@ -54,12 +53,9 @@ echo -n "Generating the ${COMPONENT} artifacts :"
 cd /home/${APPUSER}/${COMPONENT}/
 npm install     &>> ${LOGFILE}
 stat $? 
-#$ vim systemd.servce
-# mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-# systemctl daemon-reload
-# systemctl start catalogue
-# systemctl enable catalogue
-# systemctl status catalogue -l
 
-# vim /etc/nginx/default.d/roboshop.conf
-# systemctl restart nginx
+echo -n "Configuring the ${COMPONENT} system file :"
+sed -ie 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/${APPUSER}/${COMPONENT}/systemd.service
+mv /home/${APPUSER}/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
+stat $?
+
