@@ -37,14 +37,10 @@ echo -n "Downloading the ${COMPONENT} : "
 curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" 
 stat $? 
 
-cd /home/roboshop
-echo -n "present directory" 
-pwd
+cd /home/${APPUSER}
+rm -rf ${COMPONENT}
+unzip /tmp/catalogue.zip
 
-
-# $ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip"
-# $ cd /home/roboshop
-# $ unzip /tmp/catalogue.zip
 # $ mv catalogue-main catalogue
 # $ cd /home/roboshop/catalogue
 # $ npm install
