@@ -40,8 +40,7 @@ stat $?
 cd /home/${APPUSER}
 rm -rf ${COMPONENT} >> ${LOGFILE}
 unzip -o /tmp/catalogue.zip >> ${LOGFILE}
-
-# $ mv catalogue-main catalogue
+mv catalogue-main catalogue
 # $ cd /home/roboshop/catalogue
 # $ npm install
 #$ vim systemd.servce
