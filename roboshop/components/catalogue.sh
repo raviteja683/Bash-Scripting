@@ -16,9 +16,7 @@ stat() {
     fi
 }
 
-echo -e "\e[35m Configuring ${COMPONENT}\e[0m....\n"
-
-echo -e "\e[35m Congiguring the repo \e[0m....\n"
+echo -e "\e[35m Congiguring the repo \e[0m...."
 curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash - &>>LOGFILE
 stat $?
 
