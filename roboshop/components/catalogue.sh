@@ -41,7 +41,7 @@ cd /home/${APPUSER}
 rm -rf ${COMPONENT} >> ${LOGFILE}
 unzip -o /tmp/catalogue.zip >> ${LOGFILE}
 mv catalogue-main catalogue
-# $ cd /home/roboshop/catalogue
+cd /home/roboshop/catalogue
 # $ npm install
 #$ vim systemd.servce
 # mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
