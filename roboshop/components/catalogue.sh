@@ -38,8 +38,8 @@ curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${CO
 stat $? 
 
 cd /home/${APPUSER}
-rm -rf ${COMPONENT}
-unzip /tmp/catalogue.zip
+rm -rf ${COMPONENT} >> ${LOGFILE}
+unzip -o /tmp/catalogue.zip >> ${LOGFILE}
 
 # $ mv catalogue-main catalogue
 # $ cd /home/roboshop/catalogue
