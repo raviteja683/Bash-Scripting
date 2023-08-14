@@ -21,12 +21,14 @@ stat $?
 echo -n "installing ${COMPONENT} : "
 yum install redis-6.2.12 -y &>> ${LOGFILE}
 stat $?
+
+echo -n "Enabling the visibility ${COMPONENT}, so other server can access it (sudo netstat -tulpn): "
+sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/redis.conf
+sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
+stat $?
+
 # systemctl enable mongod &>> ${LOGFILE}
 # systemctl start mongod &>> ${LOGFILE}
-# echo -n "Enabling the visibility ${COMPONENT}, so other server can access it (sudo netplan -tulpn): "
-# sed -ie 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
-# stat $?
-
 # echo -n "Downloading the ${COMPONENT} schema: "
 # curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" 
 # stat $? 
