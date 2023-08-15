@@ -1,12 +1,16 @@
-#/bin/bash
+#!/bin/bash 
+
+# Validate the user who is running the script is a root user or not.
+
+USER_ID=$(id -u)
 COMPONENT=frontend
 LOGFILE="/tmp/${COMPONENT}.log"
-echo "configuring ${COMPONENT}:"
-USER_ID=$(id -u)
-if [ $USER_ID -ne 0 ] ; then
-    echo -e "\e[33m You need install ${COMPONENT} as root user!!\e[0m "
+
+if [ $USER_ID -ne 0 ] ; then    
+    echo -e "\e[31m Script is expected to executed by the root user or with a sudo privilege \e[0m \n \t Example: \n\t\t sudo bash wrapper.sh frontend"
     exit 1
-fi
+fi 
+
 stat() {
     if [ $1 -eq 0 ]; then 
         echo -e "\e[32m success \e[0m"
@@ -15,27 +19,48 @@ stat() {
         exit 2
     fi
 }
-echo -n "${COMPONENT} (nginx) installation: "
-yum install nginx -y  &>> ${LOGFILE}
+
+echo -e "\e[35m Configuring ${COMPONENT} ......! \e[0m \n"
+
+echo -n "Installing Nginx :"
+yum install nginx -y     &>>  ${LOGFILE}
 stat $?
-systemctl enable nginx
-echo -n "nginx start : "
-systemctl start nginx &>> ${LOGFILE}
+
+echo -n "Starting Nginx:" 
+systemctl enable nginx   &>>  ${LOGFILE}
+systemctl start nginx    &>>  ${LOGFILE}
 stat $?
-echo -n "${COMPONENT} components downloaded : "
-curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" &>> ${LOGFILE}
+
+echo -n "Downloading the ${COMPONENT} component:"
+curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip" 
+stat $? 
+
+echo -n "Clean up of ${COMPONENT} : "
+cd /usr/share/nginx/html    
+rm -rf *     &>>  ${LOGFILE}
 stat $?
-cd /usr/share/nginx/html
-rm -rf * &>> ${LOGFILE}
-echo -n "Extracting ${COMPONENT}: "
-unzip /tmp/${COMPONENT}.zip &>> ${LOGFILE}
-stat $?
-mv ${COMPONENT}-main/* . 
+
+echo -n "Extracting ${COMPONENT} :"
+unzip /tmp/${COMPONENT}.zip     &>>  ${LOGFILE}
+mv ${COMPONENT}-main/*  .
 mv static/* . 
-rm -rf ${COMPONENT}-main README.md &>> ${LOGFILE}
-mv localhost.conf /etc/nginx/default.d/roboshop.conf &>> ${LOGFILE}
+rm -rf ${COMPONENT}-main README.md
+mv localhost.conf /etc/nginx/default.d/roboshop.conf
+stat $?
+
+echo -n "Updating the Backend Components in the reverse proxy file:"
+
+for component in catalogue user cart shipping ; do 
+    sed -i -e "/${component}/s/localhost/${component}.roboshop.internal/" /etc/nginx/default.d/roboshop.conf
+done 
+
 echo -n "Restarting ${COMPONENT}:"
 systemctl daemon-reload     &>>  ${LOGFILE}
 systemctl restart nginx     &>>  ${LOGFILE}
 stat $?
+
 echo -e "\e[35m ${COMPONENT} Installation Is Completed \e[0m \n"
+
+
+# I want to ensure, that SCRIPT SHOULD Fail the user who run the scipt is not a root user.
+# rather executing the commands and failing.
